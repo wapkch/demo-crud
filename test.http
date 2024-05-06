@@ -1,0 +1,44 @@
+
+### Create a new user
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@exmaple.com",
+  "age": "17",
+  "companyId": "1"
+}
+
+> {%
+    client.test("Response successfully", function () {
+        client.assert(response.status === 201, "Invalid Response status");
+    });
+
+    var location = response.headers.valueOf("Location");
+    client.test("Location not null", function () {
+        client.assert(location != null, "Location is null");
+    });
+ %}
+
+### Delete a user
+DELETE http://localhost:8080/users/1
+
+### Update a user
+PUT http://localhost:8080/users/2
+Content-Type: application/json
+
+{
+  "name": "John Doe"
+}
+
+### Get a user
+GET http://localhost:8080/users/1
+
+
+### Get all users
+GET http://localhost:8080/users
+
+
+
+
